@@ -15,3 +15,17 @@ export const registerAPI = async(userData)=>{
     return response?.data;
 
 }
+
+//Login
+
+export const loginAPI = async(userData)=>{
+    const response = await axios.post('http://localhost:8090/api/v1/users/login',
+    {        
+    email: userData?.email,
+    password: userData?.password,
+    },{
+        withCredentials: true
+    })
+    return response?.data;
+
+}
