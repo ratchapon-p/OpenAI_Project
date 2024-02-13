@@ -32,7 +32,7 @@ export const loginAPI = async(userData)=>{
 
 //Check Auth
 
-export const checkUserAuthStatusAPI = async(userData)=>{
+export const checkUserAuthStatusAPI = async()=>{
     const response = await axios.get('http://localhost:8090/api/v1/users/auth/check',
     {
         withCredentials: true
@@ -41,11 +41,22 @@ export const checkUserAuthStatusAPI = async(userData)=>{
 
 }
 
-//Check Auth
+//Logout
 
-export const logoutAPI = async(userData)=>{
+export const logoutAPI = async()=>{
     const response = await axios.post('http://localhost:8090/api/v1/users/logout',
     {},
+    {
+        withCredentials: true
+    })
+    return response?.data;
+
+}
+
+//Get Profile
+
+export const getUserProfileAPI = async()=>{
+    const response = await axios.get('http://localhost:8090/api/v1/users/profile',
     {
         withCredentials: true
     })

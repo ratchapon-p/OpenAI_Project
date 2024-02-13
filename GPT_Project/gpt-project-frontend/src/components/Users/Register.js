@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { registerAPI } from "../../apis/user/usersAPI";
 import StatusMessage from "../Alert/StatusMessage";
+import { useAuth } from "../../AuthContext/AuthContext";
 
 
 // import StatusMessage from "../Alert/StatusMessage";
 
 // Validation schema
 const validationSchema = Yup.object({
+
   email: Yup.string()
     .email("Enter a valid email")
     .required("Email is required"),
@@ -19,8 +21,16 @@ const validationSchema = Yup.object({
 });
 
 const Registration = () => {
+  //custom auth hook
+  const {isAuthenticated, login} = useAuth();
   const navigate = useNavigate();
+  //redirect if user is login
+  useEffect(() =>{
+    if(isAuthenticated){
+      navigate("/dashboard")
+    }
 
+  },[isAuthenticated])
   //mutation
   const mutation = useMutation({mutationFn: registerAPI})
 
