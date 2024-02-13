@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import StatusMessage from "../Alert/StatusMessage";
 import { useMutation } from "@tanstack/react-query";
 import { loginAPI } from "../../apis/user/usersAPI";
+import { useAuth } from "../../AuthContext/AuthContext";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -15,6 +16,10 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
+  //custom auth hook
+  const {isAuthenticated, login} = useAuth();
+  console.log(isAuthenticated);
+
   const navigate = useNavigate();
 
   //mutation
@@ -28,12 +33,19 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // Here, you would typically handle form submission
-      console.log(values);
       mutation.mutate(values)
       // Simulate login success and navigate to dashboard
-      navigate("/dashboard");
+    setTimeout(() =>{
+      navigate("/dashboard")
+    },5000)
     },
   });
+  //Update is Authenticated
+  useEffect(() =>{
+    if(mutation.isSuccess){
+      login()
+    }
+  },[mutation.isSuccess])
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
