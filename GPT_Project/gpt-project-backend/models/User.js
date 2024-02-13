@@ -27,7 +27,8 @@ const userSchema = new mongoose.Schema({
     },
     subscriptionPlan:{
         type: String,
-        enum:['Trial', 'Free', 'Basic', 'Premium']
+        enum:['Trial', 'Free', 'Basic', 'Premium'],
+        default: "Trial"
     },
     apiRequestCount:{
         type: Number,
