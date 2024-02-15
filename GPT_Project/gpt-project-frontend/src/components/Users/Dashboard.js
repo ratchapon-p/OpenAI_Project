@@ -69,7 +69,7 @@ const Dashboard = () => {
           <div>
             <p className="mb-4">Monthly Credit: {data?.user?.monthlyRequestCount}</p>
             <p className="mb-4">Credit Used: {data?.user?.apiRequestCount}</p>
-            <p className="mb-4">Credit Remaining: {data?.user?.apiRequestCount}</p>
+            <p className="mb-4">Credit Remaining: {data?.user?.monthlyRequestCount - data?.user?.apiRequestCount}</p>
             <p className="mb-4">Next Billing Date: {data?.user?.nextBillingDate ? data?.user?.nextBillingDate : "No billing date" }</p>
           </div>
         </div>

@@ -7,7 +7,12 @@ import PublicNavbar from "./components/Navbar/PublicNavbar";
 import Home from "./components/Home/Home";
 import { useAuth } from "./AuthContext/AuthContext";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
-
+import BlogPostAIAssistant from "./components/ContentGeneration/ContentGeneration";
+import Plans from "./components/Plans/Plan";
+import FreePlanSignup from "./components/StripePayment/FreePlanSignup";
+import CheckoutForm from "./components/StripePayment/CheckOutForm";
+import PaymentSuccess from "./components/StripePayment/PaymentSuccess";
+import ContentGenerationHistory from "./components/ContentGeneration/ContentHistory";
 
 
 export default function App() {
@@ -25,7 +30,21 @@ export default function App() {
             <Dashboard />
           </AuthRoute>
         }/>
+        <Route path="/generate-content" element={
+          <AuthRoute>
+            <BlogPostAIAssistant />
+          </AuthRoute>
+        }/>
+        <Route path="/history" element={
+          <AuthRoute>
+            <ContentGenerationHistory />
+          </AuthRoute>
+        }/>
         <Route path="/" element={<Home />}/>
+        <Route path="/plans" element={<Plans />}/>
+        <Route path="/free-plan" element={<FreePlanSignup />}/>
+        <Route path="/checkout/:plan" element={<CheckoutForm />}/>
+        <Route path="/success" element={<PaymentSuccess />}/>
       </Routes>
       </BrowserRouter>
     </div>
